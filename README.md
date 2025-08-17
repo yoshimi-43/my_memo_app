@@ -10,11 +10,11 @@
 | 4  | 削除機能   | 登録したメモを削除する       |
 
 ## URL一覧
-| No | 役割               | HTTPメソッド | HTTPメソッド                 |
-| -- | ----------------- | ----------- | --------------------------- |
-| 1  | 一覧画面を表示する   | GET         | /memo/                      |
-| 2  | 登録機能を表示する   | GET         | /memo/create                |
-| 3  | 登録処理を実行する   | POST        | /memo/create                |
-| 4  | 更新画面を表示する   | GET         | /memo/update/<int:memo_id>  |
-| 5  | 更新処理を実行する   | POST        | /memo/update/<int:memo_id>  |
-| 6  | 削除処理を実行する   | GET         | /memo/delete/<int:memo_id>  |
+| No | 役割               | HTTPメソッド | URL                           |
+| -- | ----------------- | ----------- | ----------------------------- |
+| 1  | 一覧画面を表示する   | GET         | /memo/                        |
+| 2  | 登録機能を表示する   | GET         | /memo/create                  |
+| 3  | 登録処理を実行する   | POST        | /memo/create                  |
+| 4  | 更新画面を表示する   | GET         | /memo/update/\<int:memo_id\>  |
+| 5  | 更新処理を実行する   | POST        | /memo/update/\<int:memo_id\>  |
+| 6  | 削除処理を実行する   | GET         | /memo/delete/\<int:memo_id\>  |
