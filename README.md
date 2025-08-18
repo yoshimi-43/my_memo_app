@@ -18,3 +18,10 @@
 | 4  | 更新画面を表示する   | GET         | /memo/update/\<int:memo_id\>  |
 | 5  | 更新処理を実行する   | POST        | /memo/update/\<int:memo_id\>  |
 | 6  | 削除処理を実行する   | GET         | /memo/delete/\<int:memo_id\>  |
+
+## モデル
+
+### テーブル名：memos
+- id : PK(整数型)
+- title : タイトル(文字型)、最大50文字、NULLを許可しない
+- content : 内容(TEXT型)
