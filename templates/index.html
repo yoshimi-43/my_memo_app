@@ -4,7 +4,7 @@
   <h1>メモ一覧</h1>
   <ul>
     {% for memo in memos %}
-      <li>{{ memo.title }} utf-8
+      <li>{{ memo.title }} -
         <a href="{{ url_for('update', memo_id=memo.id) }}">編集</a>
         <a href="{{ url_for('delete', memo_id=memo.id) }}">削除</a>
       </li>

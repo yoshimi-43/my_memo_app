@@ -1,3 +1,5 @@
+import sys
+sys.path.append("/opt/miniconda3/envs/flask_env/lib/python3.13/site-packages")
 from flask import Flask
 from flask_migrate import Migrate
 from models import db
