@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for, flash
 from app import app
 from models import db, Memo, User
 from forms import MemoForm, LoginForm, SignUpForm
-from flask_login import login_user, logout_user
+from flask_login import login_user, logout_user, login_required
 
 # =====
 # ルーティング
@@ -33,6 +33,7 @@ def login():
 
 # ログアウト
 @app.route("/logout")
+@login_required
 def logout():
   # 現在ログインしているユーザーをログアウトする
   logout_user()
@@ -67,6 +68,7 @@ def register():
 
 # 一覧
 @app.route("/memo/")
+@login_required
 def index():
   # メモ全件取得
   memos = Memo.query.all()
@@ -75,6 +77,7 @@ def index():
 
 # 登録(Form使用)
 @app.route("/memo/create", methods=["GET", "POST"])
+@login_required
 def create():
   # Formインスタンス生成
   form = MemoForm()
@@ -96,6 +99,7 @@ def create():
 
 # 更新(Form使用)
 @app.route("/memo/update/<int:memo_id>", methods=["GET", "POST"])
+@login_required
 def update(memo_id):
   # データベースからmemo＿idに一致するメモを取得し、
   # 見つからない場合は404エラーを表示
@@ -118,6 +122,7 @@ def update(memo_id):
 
 # 削除
 @app.route("/memo/delete/<int:memo_id>")
+@login_required
 def delete(memo_id):
   # データベースからmemo＿idに一致するメモを取得し、
   # 見つからない場合は404エラーを表示
