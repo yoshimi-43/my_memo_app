@@ -26,7 +26,7 @@ class User(UserMixin, db.Model):
   # ID(PK)
   id = db.Column(db.Integer, primary_key=True)
   # ユーザー名
-  username = db.Column(db.String(50), unique=True, nullable=False)
+  username = db.Column(db.String(20), unique=True, nullable=False)
   # パスワード
   password = db.Column(db.String(120), nullable=False)
   # パスワードをハッシュ化して設定する
