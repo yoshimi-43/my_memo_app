@@ -35,7 +35,7 @@ def login():
 @app.route("/logout")
 def logout():
   # 現在ログインしているユーザーをログアウトする
-  login_user()
+  logout_user()
   # フラッシュメッセージ
   flash("ログアウトしました")
   # 画面遷移
