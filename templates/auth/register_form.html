@@ -3,7 +3,7 @@
 {% block content %}
   <h1>サインアップ</h1>
   {% from "_formhelpers.html" import render_field %}
-  <form method="POST" action="{{ url_for('register') }}" novalidate>
+  <form method="POST" action="{{ url_for('auth.register') }}" novalidate>
     {{ form.hidden_tag() }}
     {{ render_field(form.username) }}
     {{ render_field(form.password) }}
@@ -12,7 +12,7 @@
   </form>
 
   <p>既にアカウントをお持ちの場合は、
-    <a href="{{ url_for('login') }}">こちら</a>
+    <a href="{{ url_for('auth.login') }}">こちら</a>
     からログインしてください。
   </p>
 {% endblock %}

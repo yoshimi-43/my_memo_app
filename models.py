@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from sqlalchemy.orm import relationship
 
 # Flask-SQLAlchemyの生成
 db = SQLAlchemy()
@@ -18,6 +19,12 @@ class Memo(db.Model):
   title = db.Column(db.String(50), nullable=False)
   # 内容
   content = db.Column(db.Text)
+  
+  # ユーザーID
+  user_id = db.Column(db.Integer, db.ForeignKey('users.id', name="fk_memos_users"), nullable=False)
+
+  # Userとのリレーション
+  user = relationship("User", back_populates = "memos")
 
 # ユーザー
 class User(UserMixin, db.Model):
@@ -29,6 +36,11 @@ class User(UserMixin, db.Model):
   username = db.Column(db.String(20), unique=True, nullable=False)
   # パスワード
   password = db.Column(db.String(120), nullable=False)
+
+  # Memoとのリレーション
+  # リレーション：１対多
+  memos = relationship("Memo", back_populates = "user")
+  
   # パスワードをハッシュ化して設定する
   def set_password(self, password):
     self.password = generate_password_hash(password)
