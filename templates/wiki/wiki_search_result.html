@@ -7,6 +7,12 @@
     <h2>検索結果："{{ keyword }}"</h2>
     <p style="width: 450px;">{{ summary }}...<a href="{{ url }}" target="_blank">Read more</a></p>
   {% endif %}
+  <!-- メモに追加ボタン -->
+  <form action="{{ url_for('memo.create_from_search') }}" method="post">
+    <input type="hidden" name="title" value="{{ keyword }}">
+    <input type="hidden" name="content" value="{{ summary }}">
+    <input type="submit" value="メモに追加">
+  </form>
 
   <a href="{{ url_for('memo.index') }}">戻る</a>
 {% endblock %}
