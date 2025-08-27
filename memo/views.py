@@ -54,6 +54,7 @@ def update(memo_id):
     # 変更処理
     target_data.title = form.title.data
     target_data.content = form.content.data
+    db.session.merge(target_data)
     db.session.commit()
     # フラッシュメッセージ
     flash("変更しました")
