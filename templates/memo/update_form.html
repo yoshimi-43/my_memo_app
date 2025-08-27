@@ -6,7 +6,7 @@
   <form method="POST" action="{{ url_for('memo.update', memo_id=edit_id) }}" novalidate>
     {{ form.hidden_tag() }}
     <div class="mb-3">
-      {{ render_field(form.title), class="form-control" }}
+      {{ render_field(form.title, class="form-control") }}
     </div>
     <div class="mb-3">
       {{ render_field(form.content, class="form-control", rows=5) }}
