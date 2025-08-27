@@ -6,6 +6,7 @@ from models import db, User
 from flask_login import LoginManager
 from auth.views import auth_bp
 from memo.views import memo_bp
+from wiki.views import wiki_bp
 
 # =====
 # Flask
@@ -28,6 +29,7 @@ login_manager.login_view = "auth.login"
 # blueprintをアプリケーションに登録
 app.register_blueprint(auth_bp)
 app.register_blueprint(memo_bp)
+app.register_blueprint(wiki_bp)
 
 @login_manager.user_loader
 def load_user(user_id):

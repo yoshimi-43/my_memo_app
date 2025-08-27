@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from models import db, Memo
 from forms import MemoForm
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 # memoのBlueprint
 memo_bp = Blueprint('memo', __name__, url_prefix='/memo')
@@ -14,7 +14,7 @@ memo_bp = Blueprint('memo', __name__, url_prefix='/memo')
 @login_required
 def index():
   # メモ全件取得
-  memos = Memo.query.all()
+  memos = Memo.query.filter_by(user_id=current_user.id).all()
   # 画面遷移
   return render_template("memo/index.html", memos=memos)
 
@@ -29,7 +29,7 @@ def create():
     title = form.title.data
     content = form.content.data
     # 登録処理
-    memo = Memo(title=title, content=content)
+    memo = Memo(title=title, content=content, user_id=current_user.id)
     db.session.add(memo)
     db.session.commit()
     # フラッシュメッセージ
@@ -46,7 +46,7 @@ def create():
 def update(memo_id):
   # データベースからmemo＿idに一致するメモを取得し、
   # 見つからない場合は404エラーを表示
-  target_data = Memo.query.get_or_404(memo_id)
+  target_data = Memo.query.filter_by(id=memo_id, user_id=current_user.id).first_or_404()
   # Formに入れ替え
   form = MemoForm(obj=target_data)
 
@@ -69,11 +69,27 @@ def update(memo_id):
 def delete(memo_id):
   # データベースからmemo＿idに一致するメモを取得し、
   # 見つからない場合は404エラーを表示
-  memo = Memo.query.get_or_404(memo_id)
+  memo = Memo.query.filter_by(id=memo_id, user_id=current_user.id).first_or_404()
   # 削除処理
   db.session.delete(memo)
   db.session.commit()
   # フラッシュメッセージ
   flash("削除しました")
+  # 画面遷移
+  return redirect(url_for("memo.index"))
+
+# Wiki結果反映
+@memo_bp.route('/create_from_search', methods=['POST'])
+@login_required
+def create_from_search():
+  # 入力値の取得
+  title = request.form['title']
+  content = request.form['content']
+  new_memo = Memo(title=title, content=content, user_id=current_user.id)
+  # 追加処理
+  db.session.add(new_memo)
+  db.session.commit()
+  # フラッシュメッセージ
+  flash("wikiからデータ登録しました")
   # 画面遷移
   return redirect(url_for("memo.index"))
