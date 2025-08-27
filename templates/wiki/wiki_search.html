@@ -1,13 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Wikipediaの検索</h1>
+<div>
+  <h1 class="my-4">Wikipediaの検索</h1>
   {% from "_formhelpers.html" import render_field %}
   <form method="POST" action="{{ url_for('wiki.search') }}" novalidate>
     {{ form.hidden_tag() }}
-    {{ render_field(form.keyword) }}
-    {{ form.submit }}
+    <div class="mb-3">
+      {{ form.keyword.label(class="form-label")}}
+      {{ form.keyword(class="form-control")}}
+    </div>
+    <div class="mb-3">
+      {{ form.submit(class="btn btn-primary") }}
+    </div>
   </form>
 
-  <a href="{{ url_for('memo.index') }}">戻る</a>
+  <a href="{{ url_for('memo.index') }}" class="btn btn-secondary mt-2">戻る</a>
+</div>
 {% endblock %}
