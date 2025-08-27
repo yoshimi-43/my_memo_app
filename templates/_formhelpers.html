@@ -1,4 +1,4 @@
-{% macro render_field(field, class=") %}
+{% macro render_field(field, class="") %}
   <dt>{{ field.label }}</dt>
   <dd>{{ field(class=class, **kwargs)| safe }}</dd>
   {% if field.errors %}
