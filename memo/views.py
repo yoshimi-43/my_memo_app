@@ -77,3 +77,19 @@ def delete(memo_id):
   flash("削除しました")
   # 画面遷移
   return redirect(url_for("memo.index"))
+
+# Wiki結果反映
+@memo_bp.route('/create_from_search', methods=['POST'])
+@login_required
+def create_from_search():
+  # 入力値の取得
+  title = request.form['title']
+  content = request.form['content']
+  new_memo = Memo(title=title, content=content, user_id=current_user.id)
+  # 追加処理
+  db.session.add(new_memo)
+  db.session.commit()
+  # フラッシュメッセージ
+  flash("wikiからデータ登録しました")
+  # 画面遷移
+  return redirect(url_for("memo.index"))
