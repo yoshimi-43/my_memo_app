@@ -51,3 +51,10 @@ class SignUpForm(LoginForm):
     user = User.query.filter_by(username=username.data).first()
     if user:
       raise ValidationError('そのユーザー名は既に使用されています')
+
+# Wiki用入力クラス
+class WikiForm(FlaskForm):
+  # タイトル
+  keyword = StringField('検索ワード：', render_kw={"placeholder": "入力してください"})
+  # ボタン
+  submit = SubmitField('Wiki検索')
