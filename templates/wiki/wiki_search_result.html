@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if error %}
+    <h2>{{ error }}</h2>
+  {% else %}
+    <h2>検索結果："{{ keyword }}"</h2>
+    <p style="width: 450px;">{{ summary }}...<a href="{{ url }}" target="_blank">Read more</a></p>
+  {% endif %}
+
+  <a href="{{ url_for('memo.index') }}">戻る</a>
+{% endblock %}
